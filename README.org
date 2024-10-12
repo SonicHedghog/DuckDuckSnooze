@@ -1,0 +1,38 @@
+* DuckDuckSnooze
+** ESP32 Development
+*** Set up Docker
+#+BEGIN_SRC bash
+docker compose build
+docker compose up -d
+docker attach duckducksnooze_esp32
+#+END_SRC
+
+If you run into this error:
+#+BEGIN_SRC bash
+Error response from daemon: error gathering device information while adding custom device "/dev/ttyACM0": no such file or directory
+#+END_SRC
+
+It's because the ESP32 is not connected to the device. To just build/test the code, the device line can be commented from the docker-compose
+*** Change WiFi Credentials
++ Edit ~credentials.h~
++ Probably a good idea to not sync it up with GitHub afterwards.
+*** Sending Code to ESP32
+You can build the code with
+
+#+BEGIN_SRC bash
+idf.py build
+#+END_SRC
+
+You can flash the code with
+
+#+BEGIN_SRC bash
+idf.py flash
+#+END_SRC
+
+You might need to set the default target with
+
+#+BEGIN_SRC bash
+idf.py menuconfig
+#+END_SRC
+
+NOTE: ~idf.py flash~  builds the code as well, no need to run ~idf.py build~ as well if you just want to flash the code.
