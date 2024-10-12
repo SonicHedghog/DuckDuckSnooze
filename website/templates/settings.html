@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <title>{Duck Duck Snooze</title>
+  </head>
+  <body>
+    <h1>Duck Duck Snooze</h1>
+    <h2>{{ duck.name }} Settings</h2>
+    <form method="POST">
+      <label for="alarm_time">Set Alarm Time:</label>
+      <input
+        type="time"
+        id="alarm_time"
+        name="alarm_time"
+        value="{{ duck.alarm_time }}"
+      />
+      <br /><br />
+      <label for="gap_between_alarms">Set Gap Between Alarms (seconds):</label>
+      <input
+        type="number"
+        id="gap_between_alarms"
+        name="gap_between_alarms"
+        value="{{ duck.gap_between_alarms }}"
+      />
+      <br /><br />
+      <button type="submit">Save Settings</button>
+    </form>
+
+    <p>Current Alarm Time: {{ duck.alarm_time }}</p>
+    <p>Current Gap Between Alarms: {{ duck.gap_between_alarms }} seconds</p>
+  </body>
+</html>
