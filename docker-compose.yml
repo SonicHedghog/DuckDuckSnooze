@@ -1,0 +1,18 @@
+version: '3.8'
+
+services:
+  duckducksnooze_esp32:
+    container_name: duckducksnooze_esp32
+    image: espressif/idf:latest
+    build:
+      context: .
+      dockerfile: Dockerfile
+    # devices:
+    #   - /dev/ttyACM0
+    environment:
+      - TERM=${TERM}
+    stdin_open: true  # equivalent to --interactive
+    tty: true         # equivalent to --tty
+    user: "1000"
+    volumes:
+      - .:/mnt
