@@ -8,11 +8,6 @@ import requests
 
 from gpiozero import LED
 
-# Make sure only initializes once
-try:
-    led = 4
-except:
-    led = LED(led)
 
 app = Flask(__name__)
 
@@ -24,6 +19,8 @@ class Duck:
         self.gap_between_alarms = None
 
     def cry(self):
+        led = 4
+        led = LED(led)
         for x in range(10):
             led.toggle()
             time.sleep(0.09)
