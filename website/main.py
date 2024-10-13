@@ -46,8 +46,9 @@ def check_alarm():
 
             time.sleep(main_duck.gap_between_alarms)
             for x in ducks:
+                print(x)
                 try:
-                    requests.get(f"http://{x}/5/on")
+                    requests.get(f"http://{x}/5/on", timeout=2)
                     print(f"Duck: {x}")
                     time.sleep(main_duck.gap_between_alarms)
                 except Exception as e:
