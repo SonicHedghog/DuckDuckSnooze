@@ -24,4 +24,4 @@ def duck_settings():
     return render_template('settings.html', duck=main_duck)
 
 if __name__ == '__main__':
-    app.run(debug=True)
+    app.run(host='0.0.0.0', port=5000, debug=True)

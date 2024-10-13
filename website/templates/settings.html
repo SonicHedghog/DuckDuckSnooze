@@ -2,32 +2,81 @@
 <html lang="en">
   <head>
     <meta charset="UTF-8" />
-    <title>{Duck Duck Snooze</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>{{ duck.name }} Settings</title>
+    <link
+      href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;700&display=swap"
+      rel="stylesheet"
+    />
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css"
+    />
+    <link rel="stylesheet" type="text/css" href="styles.css" />
+    <!-- Your custom styles -->
+    <script>
+      // Function to convert military time to 12-hour format with AM/PM
+      function convertTo12Hour(timeString) {
+        const [hours, minutes] = timeString.split(":");
+        let period = "AM";
+        let hour = parseInt(hours);
+
+        if (hour >= 12) {
+          period = "PM";
+          hour = hour > 12 ? hour - 12 : hour;
+        }
+        if (hour === 0) {
+          hour = 12; // Midnight case
+        }
+
+        return `${hour}:${minutes} ${period}`;
+      }
+
+      // Update the displayed time on page load
+      document.addEventListener("DOMContentLoaded", function () {
+        const alarmTimeElement = document.getElementById("current_alarm_time");
+        if (alarmTimeElement && alarmTimeElement.dataset.alarmTime) {
+          const formattedTime = convertTo12Hour(
+            alarmTimeElement.dataset.alarmTime
+          );
+          alarmTimeElement.textContent = formattedTime;
+        }
+      });
+    </script>
   </head>
   <body>
-    <h1>Duck Duck Snooze</h1>
-    <h2>{{ duck.name }} Settings</h2>
-    <form method="POST">
-      <label for="alarm_time">Set Alarm Time:</label>
-      <input
-        type="time"
-        id="alarm_time"
-        name="alarm_time"
-        value="{{ duck.alarm_time }}"
-      />
-      <br /><br />
-      <label for="gap_between_alarms">Set Gap Between Alarms (seconds):</label>
-      <input
-        type="number"
-        id="gap_between_alarms"
-        name="gap_between_alarms"
-        value="{{ duck.gap_between_alarms }}"
-      />
-      <br /><br />
-      <button type="submit">Save Settings</button>
-    </form>
+    <div class="container">
+      <h1>{{ duck.name }} Settings</h1>
+      <form method="POST">
+        <label for="alarm_time">Set Alarm Time:</label>
+        <input
+          type="time"
+          id="alarm_time"
+          name="alarm_time"
+          value="{{ duck.alarm_time }}"
+        />
+        <br />
+        <label for="gap_between_alarms"
+          >Set Gap Between Alarms (seconds):</label
+        >
+        <input
+          type="number"
+          id="gap_between_alarms"
+          name="gap_between_alarms"
+          value="{{ duck.gap_between_alarms }}"
+        />
+        <br />
+        <button type="submit">Save Settings</button>
+      </form>
 
-    <p>Current Alarm Time: {{ duck.alarm_time }}</p>
-    <p>Current Gap Between Alarms: {{ duck.gap_between_alarms }} seconds</p>
+      <!-- Display the current alarm time in 12-hour format -->
+      <p>
+        Current Alarm Time:
+        <span id="current_alarm_time" data-alarm-time="{{ duck.alarm_time }}"
+          >{{ duck.alarm_time }}</span
+        >
+      </p>
+      <p>Current Gap Between Alarms: {{ duck.gap_between_alarms }} seconds</p>
+    </div>
   </body>
 </html>
