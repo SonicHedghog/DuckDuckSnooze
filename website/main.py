@@ -6,6 +6,11 @@ import time
 from flask import Flask, render_template, redirect, request, url_for
 import requests
 
+from gpiozero import LED
+
+led = 4
+led = LED(led)
+
 app = Flask(__name__)
 
 # Duck object for simulation
@@ -16,7 +21,9 @@ class Duck:
         self.gap_between_alarms = None
 
     def cry(self):
-        return
+        for x in range(10):
+            led.toggle()
+            time.sleep(0.9)
 
 # Simulated main duck
 main_duck = Duck('Goose')
