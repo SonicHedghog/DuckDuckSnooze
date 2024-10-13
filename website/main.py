@@ -8,8 +8,11 @@ import requests
 
 from gpiozero import LED
 
-led = 4
-led = LED(led)
+# Make sure only initializes once
+try:
+    led = 4
+except:
+    led = LED(led)
 
 app = Flask(__name__)
 
@@ -23,7 +26,7 @@ class Duck:
     def cry(self):
         for x in range(10):
             led.toggle()
-            time.sleep(0.9)
+            time.sleep(0.09)
 
 # Simulated main duck
 main_duck = Duck('Goose')
