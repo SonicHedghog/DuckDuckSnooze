@@ -1,2 +1,4 @@
 esp32_software/http_server/build/
 *~
+build/
+*.obj
